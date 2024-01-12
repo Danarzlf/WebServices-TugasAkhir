@@ -1,0 +1,17 @@
+.title-login {
+    color: var(--main-color);
+    font-weight: 800;
+    font-size: 45px;
+}
+
+.btn-login {
+    background-color: var(--main-color) !important;
+    height: 50px;
+    border-radius: 10px !important;
+}
+
+.to-register {
+    text-align: center;
+    font-size: 16px;
+}
+
