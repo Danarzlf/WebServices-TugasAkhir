@@ -86,7 +86,7 @@ export const ProfileContextProvider = ({ children }) => {
       } catch (error) {
         setIsUserProfilesLoading(false);
         setUserProfilesError({
-          error: "An error occurred while fetching user profiles.",
+          error: "An error occurred while fetching user profiles",
         });
       }
     };
