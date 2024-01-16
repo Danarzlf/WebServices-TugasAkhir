@@ -208,7 +208,12 @@ const login = async (req, res, next) => {
     return res.status(200).json({
       status: true,
       message: "Login successful",
-      data: { user, token },
+      data: {
+        user: {
+          email: user.email /* tambahkan properti lain jika diperlukan */,
+        },
+        token,
+      },
     });
   } catch (err) {
     next(err);
@@ -318,9 +323,9 @@ const authenticateUser = async (req, res, next) => {
         {
           model: UserProfile, // Assuming the alias for the user's profile is 'userProfile'
         },
-        {
-          model: Notification,
-        },
+        // {
+        //   model: Notification,
+        // },
       ],
     });
     // console.log("REQQQQ", req.user);

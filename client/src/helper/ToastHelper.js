@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 const showSuccessToast = (message) => {
   return toast.success(message, {
     duration: 3000,
-    position: "top-right",
+    position: "top-center",
     onHover: (persist, toast) => {
       persist();
     },

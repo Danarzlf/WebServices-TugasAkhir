@@ -1,5 +1,5 @@
 import { createContext, useCallback, useState } from "react";
-import { baseUrl, postRequest, putRequest } from "../utils/service";
+import { baseUrl, postRequest } from "../utils/service";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

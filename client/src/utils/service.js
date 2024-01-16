@@ -27,18 +27,33 @@ export const postRequest = async (url, body) => {
   return data;
 };
 
-export const putRequest = async (url, body) => {
-  console.log("body", body);
+export const getRequest = async (url, headers = {}) => {
+  const response = await fetch(url, { headers });
+  const data = await response.json();
+
+  if (!response.ok) {
+    let message = "Terjadi kesalahan...";
+
+    if (data?.message) {
+      message = data.message;
+    }
+
+    return { error: true, message };
+  }
+
+  return data;
+};
+
+export const putFormDataRequest = async (url, formData, headers = {}) => {
   const response = await fetch(url, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
+      ...headers,
     },
-    body: JSON.stringify(body), // Ubah objek body menjadi string JSON
+    body: formData,
   });
 
   const data = await response.json();
-  console.log("Response from server:", response);
 
   if (!response.ok) {
     let message;
@@ -48,6 +63,7 @@ export const putRequest = async (url, body) => {
     } else {
       message = data;
     }
+
     return { error: true, message };
   }
 

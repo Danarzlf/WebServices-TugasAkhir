@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Icons
@@ -16,8 +16,8 @@ import { BiSearchAlt } from "react-icons/bi";
 import { IoIosNotificationsOutline, IoIosList } from "react-icons/io";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { FaUser } from "react-icons/fa";
-import LogoutModal from "./Modals/LogoutModal";
-import "./styles/NavBar.css";
+import LogoutModal from "../Modals/LogoutModal";
+import "../styles/NavBar.css";
 
 const NavBarProfile = () => {
   const {
@@ -78,34 +78,12 @@ const NavBarProfile = () => {
                     />
                   </Link>
 
-                  <NavDropdown
-                    id="basic-nav-dropdown"
-                    title={
-                      <Button size="sm" className="nav-bg-profile">
-                        <div className="nav-page">
-                          <LuUser size={30} />
-                          Akun
-                        </div>
-                      </Button>
-                    }
-                  >
-                    <NavDropdown.Item
-                      onClick={() => {
-                        navigate("/profile");
-                      }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <FaUser size={17} />
-                        <span>Profile</span>
-                      </div>
-                    </NavDropdown.Item>
-                    <NavDropdown.Item>
-                      <div className="flex items-center gap-3">
-                        <LuLogOut size={17} />
-                        <span onClick={() => logoutUser()}>Logout</span>
-                      </div>
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                  <Button size="sm" className="nav-bg-profile">
+                    <div className="nav-page">
+                      <LuUser size={30} />
+                      Akun
+                    </div>
+                  </Button>
                 </>
               )}
 
