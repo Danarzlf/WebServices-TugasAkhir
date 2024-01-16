@@ -5,11 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 // Helper
-import {
-  showSuccessToast,
-  showErrorToast,
-  showLoadingToast,
-} from "../helper/ToastHelper";
+import { showSuccessToast, showErrorToast } from "../helper/ToastHelper";
 
 export const AuthContext = createContext();
 
@@ -34,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
 
-  console.log("USERR", user);
+  // console.log("USERR", user);
   // console.log("loginInfo", loginInfo);
   // console.log("registerInfo", registerInfo);
   // console.log("registerError", registerError);
@@ -83,7 +79,7 @@ export const AuthContextProvider = ({ children }) => {
       setIsRegisterLoading(false);
 
       if (response.error) {
-        setLoginError(response);
+        setRegisterError(response);
         showErrorToast(response.message); // Show error toast
         return;
       }
@@ -125,6 +121,8 @@ export const AuthContextProvider = ({ children }) => {
       // Assuming your response contains a 'successMessage' field
       if (response.message) {
         showSuccessToast(response.message); // Show success toast from response
+        // navigate("/");
+        window.location.href = "/";
       }
     },
     [loginInfo]
@@ -158,6 +156,8 @@ export const AuthContextProvider = ({ children }) => {
     // Perform actual logout
     localStorage.removeItem("User");
     setUser(null);
+
+    navigate("/login");
   };
 
   return (

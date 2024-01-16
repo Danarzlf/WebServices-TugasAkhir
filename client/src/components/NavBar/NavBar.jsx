@@ -8,18 +8,19 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Icons
+import { CgLogIn } from "react-icons/cg";
 import { BiSearchAlt } from "react-icons/bi";
 import { IoIosNotificationsOutline, IoIosList } from "react-icons/io";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { FaUser } from "react-icons/fa";
-import LogoutModal from "./Modals/LogoutModal";
-import "./styles/NavBar.css";
+import LogoutModal from "../Modals/LogoutModal";
+import "../styles/NavBar.css";
 
-const NavBarNotification = () => {
+const NavBar = () => {
   const {
     user,
     logoutUser,
@@ -61,24 +62,24 @@ const NavBarNotification = () => {
               {user && (
                 <>
                   <Link to="/" className="link-light text-decoration-none">
-                    <IoIosList
-                      size={33}
-                      onClick={() => {
-                        navigate("/");
-                      }}
-                    />
+                    <div className="nav-page">
+                      <IoIosList
+                        size={33}
+                        onClick={() => {
+                          navigate("/");
+                        }}
+                      />
+                      Beranda
+                    </div>
                   </Link>
                   <Link
                     to="/notification"
                     className="link-light text-decoration-none"
                   >
-                    <div className="nav-page">
-                      <IoIosNotificationsOutline
-                        size={33}
-                        className="hidden lg:flex"
-                      />
-                      Notifikasi
-                    </div>
+                    <IoIosNotificationsOutline
+                      size={33}
+                      className="hidden lg:flex"
+                    />
                   </Link>
 
                   <NavDropdown
@@ -99,10 +100,23 @@ const NavBarNotification = () => {
                         <span>Profile</span>
                       </div>
                     </NavDropdown.Item>
-                    <NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        navigate("/setting");
+                      }}
+                    >
                       <div className="flex items-center gap-3">
+                        <FaUser size={17} />
+                        <span>Pengaturan</span>
+                      </div>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>
+                      <div
+                        className="flex items-center gap-3"
+                        onClick={() => logoutUser()}
+                      >
                         <LuLogOut size={17} />
-                        <span onClick={() => logoutUser()}>Logout</span>
+                        <span>Logout</span>
                       </div>
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -111,14 +125,15 @@ const NavBarNotification = () => {
 
               {!user && (
                 <>
-                  <Link to="/login" className="link-light text-decoration-none">
-                    Login
-                  </Link>
                   <Link
-                    to="/register"
-                    className="link-light text-decoration-none"
+                    to="/login"
+                    className="link-light text-decoration-none login-navbar"
                   >
-                    Register
+                    <CgLogIn
+                      size={40}
+                      className="hidden md:flex lg:flex me-2"
+                    />
+                    Masuk
                   </Link>
                 </>
               )}
@@ -135,4 +150,4 @@ const NavBarNotification = () => {
   );
 };
 
-export default NavBarNotification;
+export default NavBar;

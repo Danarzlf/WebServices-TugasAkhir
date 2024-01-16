@@ -33,3 +33,8 @@
     padding: 0.5rem; /* Optional: Add padding for better visual appearance */
 }
 
+
+.login-navbar{
+    font-weight: bold;
+    font-size: 20px;
+}

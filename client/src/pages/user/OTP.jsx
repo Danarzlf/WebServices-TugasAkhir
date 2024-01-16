@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { OtpContext } from "../context/OtpContext";
+import { OtpContext } from "../../context/OtpContext";
 import React, { useState, useEffect } from "react";
 import {
   Alert,

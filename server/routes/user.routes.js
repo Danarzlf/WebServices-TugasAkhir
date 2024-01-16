@@ -28,7 +28,7 @@ router.put(
   changePasswordUser
 );
 
-router.get("/all-users", Auth, checkRole(["Admin"]), getAllUsers);
+router.get("/all-users", Auth, getAllUsers);
 
 router.get("/message", (req, res) => {
   res.send("Ini adalah pesan dari route GET");

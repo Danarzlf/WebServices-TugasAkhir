@@ -1,17 +1,22 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Chat from "./pages/Chat";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import NavBar from "./components/NavBar";
-import Notification from "./pages/Notification";
-import Profile from "./pages/Profile";
-import OTP from "./pages/OTP";
+import Chat from "./pages/user/Chat";
+import Register from "./pages/user/Register";
+import Login from "./pages/user/Login";
+import NavBar from "./components/NavBar/NavBar";
+import Notification from "./pages/user/Notification";
+import Profile from "./pages/user/Profile";
+import Error404 from "./pages/error/Error404";
+import OTP from "./pages/user/OTP";
 
+//Style
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "react-bootstrap";
 
+//Context
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+
+// Token Protected
+import TokenProtected from "./components/protected/TokenProtected";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -21,17 +26,28 @@ function App() {
       {/* <NavBar /> */}
 
       <Routes>
-        {/* conditional apabila data user ada maka dihalama chat */}
-        <Route path="/" element={user ? <Chat /> : <Login />} />
+        <Route path="/" element={<Chat />} />
         <Route path="/register" element={user ? <Chat /> : <Register />} />
         <Route path="/login" element={user ? <Chat /> : <Login />} />
         <Route
           path="/notification"
-          element={user ? <Notification /> : <Login />}
+          element={
+            <TokenProtected>
+              <Notification />
+            </TokenProtected>
+          }
         />
-        <Route path="/profile" element={user ? <Profile /> : <Login />} />
+        <Route
+          path="/profile"
+          element={
+            <TokenProtected>
+              <Profile />
+            </TokenProtected>
+          }
+        />
+
         <Route path="/otp" element={<OTP />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </>
   );

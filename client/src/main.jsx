@@ -6,14 +6,17 @@ import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import { OtpContextProvider } from "./context/OtpContext";
+import { ProfileContextProvider } from "./context/ProfileContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
         <OtpContextProvider>
-          <App />
-          <Toaster />
+          <ProfileContextProvider>
+            <App />
+            <Toaster />
+          </ProfileContextProvider>
         </OtpContextProvider>
       </AuthContextProvider>
     </BrowserRouter>

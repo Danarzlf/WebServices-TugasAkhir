@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Icons
@@ -16,10 +16,10 @@ import { BiSearchAlt } from "react-icons/bi";
 import { IoIosNotificationsOutline, IoIosList } from "react-icons/io";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { FaUser } from "react-icons/fa";
-import LogoutModal from "./Modals/LogoutModal";
-import "./styles/NavBar.css";
+import LogoutModal from "../Modals/LogoutModal";
+import "../styles/NavBar.css";
 
-const NavBar = () => {
+const NavBarNotification = () => {
   const {
     user,
     logoutUser,
@@ -61,24 +61,24 @@ const NavBar = () => {
               {user && (
                 <>
                   <Link to="/" className="link-light text-decoration-none">
-                    <div className="nav-page">
-                      <IoIosList
-                        size={33}
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      />
-                      Beranda
-                    </div>
+                    <IoIosList
+                      size={33}
+                      onClick={() => {
+                        navigate("/");
+                      }}
+                    />
                   </Link>
                   <Link
                     to="/notification"
                     className="link-light text-decoration-none"
                   >
-                    <IoIosNotificationsOutline
-                      size={33}
-                      className="hidden lg:flex"
-                    />
+                    <div className="nav-page">
+                      <IoIosNotificationsOutline
+                        size={33}
+                        className="hidden lg:flex"
+                      />
+                      Notifikasi
+                    </div>
                   </Link>
 
                   <NavDropdown
@@ -94,15 +94,28 @@ const NavBar = () => {
                         navigate("/profile");
                       }}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center">
                         <FaUser size={17} />
                         <span>Profile</span>
                       </div>
                     </NavDropdown.Item>
-                    <NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        navigate("/setting");
+                      }}
+                    >
                       <div className="flex items-center gap-3">
+                        <FaUser size={17} />
+                        <span>Pengaturan</span>
+                      </div>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>
+                      <div
+                        className="flex items-center "
+                        onClick={() => logoutUser()}
+                      >
                         <LuLogOut size={17} />
-                        <span onClick={() => logoutUser()}>Logout</span>
+                        <span>Logout</span>
                       </div>
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -135,4 +148,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBarNotification;
